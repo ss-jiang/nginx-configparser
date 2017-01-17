@@ -32,3 +32,14 @@ TEST_F(NSCP_Fixture_Test, MissingEndQuote) {
 TEST_F(NSCP_Fixture_Test, EmptyStatement) {
 	EXPECT_TRUE(ParseString(";"));
 }
+
+TEST_F(NSCP_Fixture_Test, ServerName) {
+	EXPECT_TRUE(ParseString("server_name foo.com;"));
+	EXPECT_EQ("server_name", out_config_.statements_.at(0)->tokens_.at(0));
+	EXPECT_EQ("foo.com", out_config_.statements_.at(0)->tokens_.at(1));
+}
+
+TEST_F(NSCP_Fixture_Test, ListenTime) {
+	EXPECT_TRUE(ParseString("listen 80;"));
+	EXPECT_EQ("80", out_config_.statements_.at(0)->tokens_.at(1));
+}
